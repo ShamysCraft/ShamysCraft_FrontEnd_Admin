@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+
+// Navigation
+/*Top */ import Header from "./core/Header/Header"
+/*Side */ import SideNav from "./core/SideNavBar/SideNavBar"
+
+//import routes
+import Routes from "./Routes"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <div className="header"> <Header /></div>
+      <div className="BodyContainer">
+        {/* left side navbar */}
+        <div className="sideNavBar"><SideNav /> </div>
+        <div className="content">
+          <div className="body"><Routes /></div>
+          <div className="Footer"></div>
+        </div>
+      </div>
+
     </div>
   );
 }
