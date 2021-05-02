@@ -3,8 +3,9 @@ import { Route, Switch } from 'react-router-dom'
 
 
 // page content for admin
-import Shop from "./admin/ShopPage"
+// import Home from "./admin/Home"
 import Sales from "./admin/ShopSalesPage"
+
 
 import AddItem from "./admin/AddItemPage"
 import AddCategory from "./admin/AddCategory"
@@ -25,41 +26,39 @@ import AdminDashboard from "./user/AdminDashBoard"
 
 
 function Routes() {
-    return (
-        <div>
-             <Switch>
-              <Route path="/profile">
-                <ProfilePage />
-              </Route>
-              <Route path="/signin" component={SignIn} />
-                
-              <Route path="/dashboard">
-                <AdminDashboard />
-              </Route>
-              <Route path='/shop'>
-                <Shop />
-              </Route>
-              <Route path='/shopSales'>
-                <Sales />
-              </Route>
-              <Route path='/addItem' exact>
-                <AddItem />
-              </Route>
-              <Route path='/pendingOrder'>
-                <PendingOrder />
-              </Route>
-              <Route path='/confirmOrder'>
-                <ConfirmOrder />
-              </Route>
-              <Route path='/rejectedOrder'>
-                <RejectedOrder />
-              </Route>
+  return (
+    <div>
+      <Switch>
+        <Route path="/admin/dashboard" component={AdminDashboard} />
+
+        <Route path="/profile" component={ProfilePage} />
+
+        <Route path="/signin" component={SignIn} />
+
+        <Route path='/shopSales' component={Sales} />
+
+        <Route path='/addItem' component={AddItem} />
+
+        <Route path='/orders' component={Orders} />
+
+        <Route path='/addCategory' component={AddCategory} />
+
+        <Route path='/updateProduct' component={UpdateProducts} />
+
+        <Route path='/manageProduct' component={ManageProducts} />
+
+        <Route path='/pendingOrder' component={PendingOrder} />
+
+        <Route path='/confirmOrder' component={ConfirmOrder} />
+
+        <Route path='/rejectedOrder' component={RejectedOrder} />
 
 
-            </Switch>
-          
-        </div>
-    )
+
+      </Switch>
+
+    </div>
+  )
 }
 
 export default Routes

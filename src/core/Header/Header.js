@@ -4,8 +4,7 @@ import { COLOURS } from "../../theme/colors"
 import { makeStyles } from "@material-ui/core/styles"
 
 //import material ui design 
-import SearchIcon from '@material-ui/icons/Search';
-import CartIcon from '@material-ui/icons/ShoppingCart';
+
 import ProfileIcon from '@material-ui/icons/AccountCircle'
 import HelpIcon from '@material-ui/icons/Help'
 import HomeIcon from '@material-ui/icons/Home'
@@ -18,8 +17,6 @@ import {
     Tabs,
     Typography,
     Toolbar,
-    InputBase,
-    Button,
     Menu
 
 } from '@material-ui/core'

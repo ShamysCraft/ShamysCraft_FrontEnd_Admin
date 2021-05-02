@@ -9,7 +9,7 @@ import { COLOURS } from "../../theme/colors"
 const useStyles = makeStyles((theme) => ({
     sidebar: {
         position: 'fixed',
-        height: '70%',
+        height: '80%',
         width: '200px',
         backgroundColor: 'white',
         margin: '50px 0 25px 0',
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     sidebarList: {
         height: 'auto',
         marginTop: '20px',
-        // width: '100%',
+        width: '100%',
         padding: '8px'
         
     },
 
     row: {
-        // width: '182px',
+        width: '100%',
         height: '60px',
         margin: '10px',
         display: 'flex',

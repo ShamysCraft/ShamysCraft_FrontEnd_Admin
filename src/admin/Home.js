@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-const ShopPage = (props)=>{
+const Home = (props)=>{
     return(
         <div>
             <h1>hi</h1>
@@ -8,4 +8,4 @@ const ShopPage = (props)=>{
     )
 }
 
-export default ShopPage;
+export default Home;
