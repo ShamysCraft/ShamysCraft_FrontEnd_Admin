@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 
 import {
     Card,
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
     },
     submit: {
-        marginTop: '10px'
+        marginTop: '10px',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -47,7 +48,26 @@ const useStyles = makeStyles((theme) => ({
     card: {
         padding: '20px',
         margin: '20px',
-        width: '50vh'
+        width: '50vh',
+    },
+    link:{
+        color: 'white',
+        textDecoration: 'none',
+        "&:hover":{
+            color: 'white',
+            textDecoration: 'none'
+
+        },
+        "&:focus":{
+            color: 'white',
+            textDecoration: 'none'
+
+        },
+        "&:active":{
+            color: 'white',
+            textDecoration: 'none'
+
+        },
     }
 }));
 
@@ -68,7 +88,7 @@ const AddItemPage = (props) => {
                 <Card className={classes.card}>
                     <CssBaseline />
                     <Typography variant="h4">Add Item</Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} >
 
                         {/* <FormLabel>Name</FormLabel> */}
                         <TextField
@@ -152,7 +172,7 @@ const AddItemPage = (props) => {
                         <div>
                             <ButtonGroup className={classes.submit} fullWidth disableRipple variant="contained">
                                 <Button color="primary">Add Item</Button>
-                                <Button color="secondary">Cancel</Button>
+                                <Button color="secondary"><Link to="/" className={classes.link}>Cancel</Link></Button>
                             </ButtonGroup>
                         </div>
                     </form>

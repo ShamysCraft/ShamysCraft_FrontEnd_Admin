@@ -19,7 +19,9 @@ function App() {
         <div className="sideNavBar"><SideNav /></div>
 
         <div className="content">
-          <div className="body"><Routes /></div>
+          <div className="body">
+            <Routes />
+            </div>
           <div className="Footer"></div>
         </div>
 

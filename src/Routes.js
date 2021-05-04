@@ -4,11 +4,13 @@ import { Route, Switch } from 'react-router-dom'
 
 // page content for admin
 // import Home from "./admin/Home"
+import Home from "./admin/Home"
+
 import Sales from "./admin/ShopSalesPage"
 
 
-import AddItem from "./admin/AddItemPage"
 import AddCategory from "./admin/AddCategory"
+import AddItem from "./admin/AddItemPage"
 import ManageProducts from "./admin/ManageProducts"
 import UpdateProducts from "./admin/UpdateProduct"
 
@@ -23,35 +25,43 @@ import ProfilePage from "./user/ProfilePage"
 import SignIn from "./user/SignIn"
 import AdminDashboard from "./user/AdminDashBoard"
 
+//import Admin Route
+import AdminRoute from "./auth/helper/AdminRoute"
+
+//error
+import Error from "./admin/ErrorPage"
 
 
 function Routes() {
   return (
     <div>
       <Switch>
-        <Route path="/admin/dashboard" component={AdminDashboard} />
-
-        <Route path="/profile" component={ProfilePage} />
 
         <Route path="/signin" component={SignIn} />
+        <Route path="/error" component={Error} />
 
-        <Route path='/shopSales' component={Sales} />
+        <AdminRoute path="/" exact component={Home}/>
+        <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
+        <AdminRoute path="/profile" component={ProfilePage}/>
+        <AdminRoute path='/addItem' component={AddItem} />
 
-        <Route path='/addItem' component={AddItem} />
 
-        <Route path='/orders' component={Orders} />
+        <AdminRoute path='/shopSales' component={Sales} />
 
-        <Route path='/addCategory' component={AddCategory} />
 
-        <Route path='/updateProduct' component={UpdateProducts} />
+        <AdminRoute path='/orders' component={Orders} />
 
-        <Route path='/manageProduct' component={ManageProducts} />
+        <AdminRoute path='/addCategory' component={AddCategory} />
 
-        <Route path='/pendingOrder' component={PendingOrder} />
+        <AdminRoute path='/updateProduct' component={UpdateProducts} />
 
-        <Route path='/confirmOrder' component={ConfirmOrder} />
+        <AdminRoute path='/manageProduct' component={ManageProducts} />
 
-        <Route path='/rejectedOrder' component={RejectedOrder} />
+        <AdminRoute path='/pendingOrder' component={PendingOrder} />
+
+        <AdminRoute path='/confirmOrder' component={ConfirmOrder} />
+
+        <AdminRoute path='/rejectedOrder' component={RejectedOrder} />
 
 
 
