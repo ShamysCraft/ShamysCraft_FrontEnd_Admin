@@ -19,13 +19,15 @@ const useStyles = makeStyles((theme) => ({
     sidebarList: {
         height: 'auto',
         marginTop: '20px',
-        width: '100%',
+        // width: '100%',
         padding: '8px'
         
     },
 
     row: {
+        // width: '200px',
         width: '100%',
+
         height: '60px',
         margin: '10px',
         display: 'flex',
@@ -87,7 +89,7 @@ const SideNavBar = () => {
             <ul className={classes.sidebarList}>
                 <li className={classes.row} ><Storefront /><Link style={{ textDecoration: 'none' }} to='/'><Typography className={classes.title}>Visit Shop</Typography></Link></li>
                 <li className={classes.row} ><MonetizationOn /><Link style={{ textDecoration: 'none' }} to='/shopSales'><Typography className={classes.title}>Sales</Typography></Link></li>
-                <li className={classes.row} ><LibraryAdd /><Link style={{ textDecoration: 'none' }} to='/addCategory'><Typography className={classes.title}>Add Category</Typography></Link></li>
+                <li className={classes.row} ><LibraryAdd /><Link style={{ textDecoration: 'none' }} to='/manageCategory'><Typography className={classes.title}>Manage Category</Typography></Link></li>
                 <li className={classes.row} ><LibraryAdd /><Link style={{ textDecoration: 'none' }} to='/addItem'><Typography className={classes.title}>Add Item</Typography></Link></li>
                 <li className={classes.row} ><HourglassEmpty /><Link style={{ textDecoration: 'none' }} to='/pendingOrder'><Typography className={classes.title}>Pending Orders</Typography></Link></li>
                 <li className={classes.row} ><DoneAll /><Link style={{ textDecoration: 'none' }} to='/confirmOrder'><Typography className={classes.title}>Confirm Orders</Typography></Link></li>

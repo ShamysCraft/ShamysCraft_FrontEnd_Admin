@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ErrorOutline, CheckCircleOutline } from "@material-ui/icons"
 
-import { Card, MenuItem, TextField, InputAdornment, Typography, Container, CssBaseline, FormLabel, Button, ButtonGroup } from "@material-ui/core"
+import { Card, MenuItem, TextField, InputAdornment,Form, Typography, Container, CssBaseline, FormLabel, Button, ButtonGroup } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { } from "@material-ui/icons"
-import { createProduct, getCategories } from "./helper/adminapicall";
+import { getCategories, getProduct, updateProduct } from "./helper/adminapicall";
 import { isAuthenticated } from "../auth/helper";
 
 
-const AddItemPage = (props) => {
+const UpdateProduct = ({ match }) => {
     const { user, token } = isAuthenticated()
-    const Character_limit= 100;
+    const Character_limit = 50;
     const classes = useStyles();
 
     const [success, setSuccess] = useState(false)
@@ -46,27 +46,54 @@ const AddItemPage = (props) => {
 
 
     // preLoad -> categories -> backend -> db
-    const preLoad = () => {
-        getCategories().then(data => {
+    const preLoad = (productId) => {
+
+        getProduct(productId).then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error })
 
             } else {
-                setValues({ ...values, categories: data, formData: new FormData() })
-                console.log(categories)
+                setValues({
+                    ...values,
+                    prodname: data.prodname,
+                    description: data.description,
+                    price: data.price,
+                    category: data.category._id,
+                    quantity: data.quantity,
+                    formData: new FormData()
+                })
+                preLoadCategories();
+                console.log("prod",productId)
+            }
+        })
+    }
+
+    const preLoadCategories =() =>{
+        getCategories()
+        .then(data => {
+            if(data.error){
+                setValues({ ...values, error: data.error })
+
+            }
+            else{
+                setValues({
+                    categories : data, formData: new FormData()
+                 })
+
             }
         })
     }
 
     useEffect(() => {
-        preLoad();
+        preLoad(match.params.productId);
     }, []);
 
-    // onSubmit
+    // onSubmit 
     const onSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: "", loading: true })
-        createProduct(user._id, token, formData)
+
+        updateProduct(match.params.productId,user._id, token, formData)
             .then(data => {
                 if (data.error) {
                     setValues({ ...values, error: data.error })
@@ -100,7 +127,7 @@ const AddItemPage = (props) => {
             return (
                 <div className={classes.alertSuccess} style={{ display: success ? true : false }}>
                     <CheckCircleOutline />
-                    <Typography style={{ marginLeft: '10px', width: 'auto' }} >Product Created Successfully </Typography>
+                    <Typography style={{ marginLeft: '10px', width: 'auto' }} >Product Updated Successfully </Typography>
                 </div>
             )
         }
@@ -117,11 +144,11 @@ const AddItemPage = (props) => {
 
     return (
         <div>
-            <Container component="main"  maxWidth="sm">
+            <Container component="main" maxWidth="xs">
                 <Card className={classes.card}>
                     <CssBaseline />
-                    <Typography variant="h4" align="center">Add Item</Typography>
-                    <form className={classes.form} >
+                    <Typography variant="h4">Update Item</Typography>
+                    <form className={classes.form} noValidate >
 
 
                         <FormLabel >
@@ -129,19 +156,22 @@ const AddItemPage = (props) => {
                             {errorMessage()}
                         </FormLabel>
                         <TextField
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             required
                             id="title"
-                            label="Item Name"
                             name="title"
                             fullWidth
                             value={prodname}
                             autoFocus
+                            label="Product Name"
+                            InputLabelProps={{
+                                shrink: true,
+                              }}
                             onChange={onHandleChange("prodname")}
                         />
                         <TextField
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             required
                             id="Category"
@@ -159,7 +189,7 @@ const AddItemPage = (props) => {
                             ))}
                         </TextField>
                         <TextField
-                            variant="outlined"
+                            variant="standard"
                             margin="normal"
                             required
                             id="Price"
@@ -171,9 +201,7 @@ const AddItemPage = (props) => {
                             onChange={onHandleChange("price")}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">LKR</InputAdornment>,
-                                inputProps: { min: 1, max:100 }
-                              }}
-                            fullWidth
+                            }}
 
                         />
                         <TextField
@@ -183,6 +211,9 @@ const AddItemPage = (props) => {
                             multiline
                             rows={1}
                             id="Description"
+                            InputLabelProps={{
+                                shrink: true,
+                              }}
                             label="Description"
                             name="Description"
                             placeholder=""
@@ -192,10 +223,10 @@ const AddItemPage = (props) => {
                             value={description}
                             inputProps={{
                                 maxLength: Character_limit
-                              }}
+                            }}
                             onChange={onHandleChange("description")}
-                            helperText={`${description.length}/${Character_limit}`}
-        
+                            // helperText={`${description.length}/${Character_limit}`}
+
                         />
                         <TextField
                             id="outlined"
@@ -214,26 +245,26 @@ const AddItemPage = (props) => {
 
 
                         <TextField
+                            id="outlined-number"
                             variant="outlined"
                             margin="normal"
                             required
-                            id="quantity"
                             label="Quantity"
                             name="quantity"
                             placeholder="Example: 10"
-                            InputLabelProps={{
-                                shrink: true,
-                              }}
+                            autoFocus
                             fullWidth
                             value={quantity}
                             onChange={onHandleChange("quantity")}
-                            type="Number"
-                            InputProps={{ inputProps: { min: 1, max:100 } }}
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                              }}
                         />
 
                         <div>
                             <ButtonGroup className={classes.submit} fullWidth disableRipple variant="contained">
-                                <Button color="primary" onClick={onSubmit}>Add Item</Button>
+                                <Button color="primary" onClick={onSubmit}>Update Item</Button>
                                 <Button color="secondary"><Link to="/" className={classes.link}>Cancel</Link></Button>
                             </ButtonGroup>
                         </div>
@@ -244,7 +275,7 @@ const AddItemPage = (props) => {
     )
 }
 
-export default AddItemPage;
+export default UpdateProduct;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -265,7 +296,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
         padding: '20px',
         margin: '20px',
-        width: '60vh',
+        width: '50vh',
     },
     link: {
         color: 'white',

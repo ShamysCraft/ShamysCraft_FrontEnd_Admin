@@ -11,8 +11,7 @@ import Sales from "./admin/ShopSalesPage"
 
 import AddCategory from "./admin/AddCategory"
 import AddItem from "./admin/AddItemPage"
-import ManageProducts from "./admin/ManageProducts"
-import UpdateProducts from "./admin/UpdateProduct"
+import UpdateProduct from "./admin/UpdateProducts"
 
 
 import Orders from "./admin/Orders"
@@ -51,11 +50,10 @@ function Routes() {
 
         <AdminRoute path='/orders' component={Orders} />
 
-        <AdminRoute path='/addCategory' component={AddCategory} />
+        <AdminRoute path='/manageCategory' component={AddCategory} />
 
-        <AdminRoute path='/updateProduct' component={UpdateProducts} />
+        <AdminRoute path='/product/update/:productId' exact component={UpdateProduct} />
 
-        <AdminRoute path='/manageProduct' component={ManageProducts} />
 
         <AdminRoute path='/pendingOrder' component={PendingOrder} />
 

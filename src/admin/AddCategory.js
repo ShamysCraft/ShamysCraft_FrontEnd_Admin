@@ -9,14 +9,20 @@ import {
     CssBaseline,
     FormLabel,
     Button,
-    ButtonGroup
+    ButtonGroup,
+    CardContent
 } from "@material-ui/core"
+import { ErrorOutline, CheckCircleOutline } from "@material-ui/icons"
 
 import { makeStyles } from "@material-ui/core/styles"
 import { } from "@material-ui/icons"
 import { isAuthenticated } from '../auth/helper';
+import { createCategory } from './helper/adminapicall';
 
 const useStyles = makeStyles((theme) => ({
+    container:{
+        display: 'flex'
+    },
     qtybtn: {
         padding: '5px',
         border: '2px'
@@ -27,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
         width: '100%', // Fix IE 11 issue.
+        marginTop: '20px'
 
     },
 
@@ -34,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '20px',
         marginTop: '10%',
         width: '50vh',
-        marginLeft: '30%'
+        
     },
     link: {
         color: 'white',
@@ -54,44 +61,139 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'none'
 
         },
+    },
+    alertError: {
+        padding: '7px',
+        backgroundColor: '#d62828',
+        color: 'white',
+        borderRadius: '3px',
+        width: 'auto',
+        display: 'flex',
+        marginBottom: '2px'
+    },
+    alertSuccess: {
+        padding: '7px',
+        backgroundColor: 'green',
+        color: 'white',
+        borderRadius: '3px',
+        width: 'auto',
+        display: 'flex',
+        marginBottom: '2px',
+    },
+    alert: {
+        fontSize: '10px'
     }
 }));
 
 function AddCategory() {
     const classes = useStyles();
-    const [text, setText] = useState("")
-    const [error, setError] = useState(false)
+
+    const [Name, setName] = useState("")
+
+    const [error, setError] = useState("")
+
     const [success, setSuccess] = useState(false)
 
     // user and token generated will be extracted
     const { user, token } = isAuthenticated()
 
+    //onHandlechange
+    const onHandleChange = event => {
+        setError("")
+        setName(event.target.value)
+    }
 
+    // onSubmit
+    const onSubmit = event => {
+        event.preventDefault();
+        setError("")
+        setSuccess(false)
+
+        // backend request fired
+        createCategory(user._id, token, { Name })
+            .then(data => {
+                if (data.error) {
+                    setError(data.error)
+                } else {
+                    setError("")
+                    setSuccess(true)
+                    setName("")
+                }
+            })
+    }
+
+    // success
+    const successMessage = () => {
+        if (success) {
+            return (
+                <div className={classes.alertSuccess} style={{ display: success ? true : false }}>
+                    <CheckCircleOutline />
+                    <Typography style={{ marginLeft: '10px', width: 'auto' }} >Category Created Successfully</Typography>
+                </div>
+            )
+        }
+    }
+    // error
+    const errorMessage = () => {
+
+        return (
+            <div className={classes.alertError} style={{ display: error ? "" : "none" }}>
+                <ErrorOutline />
+                <Typography style={{ marginLeft: '10px', width: 'auto' }} >{error}</Typography>
+            </div>
+        )
+
+    }
     return (
         <div>
-            <Container>
+            <Container className={classes.container}>
+                <CardContent>
                 <Card className={classes.card}>
                     <CssBaseline />
-                    <Typography variant="h4">Add Category</Typography>
+                    <CardContent>
+                        <Typography variant="h4">Add Category</Typography>
+                    </CardContent>
+
                     <form className={classes.form} >
-                        <TextField
-                            variant="standard"
-                            margin="normal"
-                            required
-                            id="title"
-                            label="Category Name"
-                            name="title"
-                            fullWidth
-                            onChange={event => setText(event.target.value)}
-                        />
+
+                        {errorMessage()}
+                        {successMessage()}
+
+
+
+                        <CardContent>
+                            <Typography variant="h6" >Enter the category name.</Typography>
+
+
+                            <TextField
+                                variant="standard"
+                                margin="normal"
+                                required
+                                id="title"
+                                label="Ex: Wood Craft"
+                                name="title"
+                                fullWidth
+                                value={Name}
+                                autoComplete={Name}
+                                onChange={onHandleChange}
+                            />
+
+                        </CardContent>
+
                         <div>
                             <ButtonGroup className={classes.submit} fullWidth disableRipple variant="contained">
-                                <Button color="primary">Create Category</Button>
+                                <Button color="primary" onClick={onSubmit}>Add Category</Button>
                                 <Button color="secondary"><Link to="/" className={classes.link}>Cancel</Link></Button>
                             </ButtonGroup>
                         </div>
                     </form>
                 </Card>
+                </CardContent>
+                <CardContent>
+                    <Card>
+                        
+                    </Card>
+                </CardContent>
             </Container>
         </div>
     )
