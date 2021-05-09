@@ -23,6 +23,7 @@ import RejectedOrder from "./admin/RejectedOrders"
 import ProfilePage from "./user/ProfilePage"
 import SignIn from "./user/SignIn"
 import AdminDashboard from "./user/AdminDashBoard"
+import Help from "./admin/HelpPage"
 
 //import Admin Route
 import AdminRoute from "./auth/helper/AdminRoute"
@@ -43,6 +44,8 @@ function Routes() {
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
         <AdminRoute path="/profile" component={ProfilePage}/>
         <AdminRoute path='/addItem' component={AddItem} />
+        
+        <AdminRoute path='/help' component={Help} />
 
 
         <AdminRoute path='/shopSales' component={Sales} />
