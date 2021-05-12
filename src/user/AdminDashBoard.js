@@ -16,11 +16,7 @@ const {user: {fname, lname, email, role}} = isAuthenticated();
         <div>
            <Container>
                 <Card >
-                    <Typography>Admin Information</Typography>
-                    <Typography>{fname}</Typography>
-                    <Typography>{lname}</Typography>
-                    <Typography>{email}</Typography>
-                    <Typography>{role}</Typography>
+                    
                 </Card>
                 </Container>
         </div>

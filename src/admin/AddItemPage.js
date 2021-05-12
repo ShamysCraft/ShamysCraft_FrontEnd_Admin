@@ -167,7 +167,7 @@ const AddItemPage = (props) => {
                             placeholder="Example: 20"
                             name="Price"
                             value={price}
-                            type="Number"
+                            type="tel"
                             onChange={onHandleChange("price")}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">LKR</InputAdornment>,
@@ -227,7 +227,8 @@ const AddItemPage = (props) => {
                             fullWidth
                             value={quantity}
                             onChange={onHandleChange("quantity")}
-                            type="Number"
+                            type="tel"
+                            className={classes.num}
                             InputProps={{ inputProps: { min: 1, max:100 } }}
                         />
 
@@ -304,4 +305,17 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         marginBottom: '2px',
     },
+    num:{
+        '&[type=Number]': {
+            '-moz-appearance': 'textfield',
+          },
+          '&::-webkit-outer-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0,
+          },
+          '&::-webkit-inner-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0,
+          },
+    }
 }));

@@ -1,23 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import {
-    Card,
-    MenuItem,
-    TextField,
-    Typography,
-    Container,
-    CssBaseline,
-    FormLabel,
-    Button,
-    ButtonGroup,
-    CardContent
-} from "@material-ui/core"
+import {Card,MenuItem,TextField,Typography,Container,CssBaseline,Button,ButtonGroup, CardContent} from "@material-ui/core"
 import { ErrorOutline, CheckCircleOutline } from "@material-ui/icons"
 
 import { makeStyles } from "@material-ui/core/styles"
 import { } from "@material-ui/icons"
 import { isAuthenticated } from '../auth/helper';
-import { createCategory } from './helper/adminapicall';
+import { createCategory, getCategories } from './helper/adminapicall';
 
 const useStyles = makeStyles((theme) => ({
     container:{
@@ -93,6 +82,35 @@ function AddCategory() {
     const [error, setError] = useState("")
 
     const [success, setSuccess] = useState(false)
+
+    const [Categories, setCategories] = useState([])
+
+    const [values, setValues] = useState({
+        errors: "",
+        categories: [],
+        formData: ""
+    })
+
+    const { errors, categories, formData } = values;
+    // preload data
+    const preLoadCategories = () => {
+        getCategories()
+            .then(data => {
+                if (data.err) {
+                    setValues({ ...values, errors: data.error })
+                } else {
+                    console.log(categories)
+
+                    setValues({ ...values, categories: data })
+                    console.log(categories)
+                }
+            })
+
+    }
+
+    useEffect(() => {
+        preLoadCategories()
+    }, [categories])
 
     // user and token generated will be extracted
     const { user, token } = isAuthenticated()
@@ -190,9 +208,15 @@ function AddCategory() {
                 </Card>
                 </CardContent>
                 <CardContent>
-                    <Card>
-                        
-                    </Card>
+                    {/* list all categories */}
+                <Card className={classes.card}>
+                    <Typography variant="h6"> Categories Created </Typography>
+                       {categories && categories.map((category, index)=>(
+                           <Typography variant="body1" color="primary" key={index} value={category._id}>
+                               {category.Name}
+                           </Typography>
+                       ))}       
+                </Card>
                 </CardContent>
             </Container>
         </div>

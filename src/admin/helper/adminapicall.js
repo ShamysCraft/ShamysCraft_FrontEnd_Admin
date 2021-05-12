@@ -25,7 +25,6 @@ export const getCategories = () => {
         .catch(err => console.log(err))
 }
 
-// 3. update category
 
 
 

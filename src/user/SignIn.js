@@ -90,13 +90,13 @@ function SignIn() {
         
         if (didRedirect) {
             if (user && user.role === 45) {
-                return <Redirect to="/admin/dashboard"/>;
+                return <Redirect to="/"/>;
             }else{
                 return <Typography className={root.alertError}>Incorrect Admin Credentials</Typography>
             }
         }
         if (isAuthenticated() && user.role === 45) {
-            return <Redirect to="/admin/dashboard" />;
+            return <Redirect to="/" />;
         }
         
     };
