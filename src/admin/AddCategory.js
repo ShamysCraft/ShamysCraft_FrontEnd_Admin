@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
-import {Card,MenuItem,TextField,Typography,Container,CssBaseline,Button,ButtonGroup, CardContent} from "@material-ui/core"
+import { Card, MenuItem, TextField, Typography, Container, CssBaseline, Button, ButtonGroup, CardContent } from "@material-ui/core"
 import { ErrorOutline, CheckCircleOutline } from "@material-ui/icons"
 
 import { makeStyles } from "@material-ui/core/styles"
@@ -9,7 +9,7 @@ import { isAuthenticated } from '../auth/helper';
 import { createCategory, getCategories } from './helper/adminapicall';
 
 const useStyles = makeStyles((theme) => ({
-    container:{
+    container: {
         display: 'flex'
     },
     qtybtn: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '20px',
         marginTop: '10%',
         width: '50vh',
-        
+
     },
     link: {
         color: 'white',
@@ -71,6 +71,14 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         fontSize: '10px'
+    },
+    cat: {
+        padding: '5px'
+    },
+    heading: {
+        backgroundColor: '#f0efeb',
+        borderRadius: '5px',
+        padding: '2px'
     }
 }));
 
@@ -166,57 +174,57 @@ function AddCategory() {
         <div>
             <Container className={classes.container}>
                 <CardContent>
-                <Card className={classes.card}>
-                    <CssBaseline />
-                    <CardContent>
-                        <Typography variant="h4">Add Category</Typography>
-                    </CardContent>
-
-                    <form className={classes.form} >
-
-                        {errorMessage()}
-                        {successMessage()}
-
-
-
+                    <Card className={classes.card}>
+                        <CssBaseline />
                         <CardContent>
-                            <Typography variant="h6" >Enter the category name.</Typography>
-
-
-                            <TextField
-                                variant="standard"
-                                margin="normal"
-                                required
-                                id="title"
-                                label="Ex: Wood Craft"
-                                name="title"
-                                fullWidth
-                                value={Name}
-                                autoComplete={Name}
-                                onChange={onHandleChange}
-                            />
-
+                            <Typography variant="h4">Add Category</Typography>
                         </CardContent>
 
-                        <div>
-                            <ButtonGroup className={classes.submit} fullWidth disableRipple variant="contained">
-                                <Button color="primary" onClick={onSubmit}>Add Category</Button>
-                                <Button color="secondary"><Link to="/" className={classes.link}>Cancel</Link></Button>
-                            </ButtonGroup>
-                        </div>
-                    </form>
-                </Card>
+                        <form className={classes.form} >
+
+                            {errorMessage()}
+                            {successMessage()}
+
+
+
+                            <CardContent>
+                                <Typography variant="h6" >Enter the category name.</Typography>
+
+
+                                <TextField
+                                    variant="standard"
+                                    margin="normal"
+                                    required
+                                    id="title"
+                                    label="Ex: Wood Craft"
+                                    name="title"
+                                    fullWidth
+                                    value={Name}
+                                    autoComplete={Name}
+                                    onChange={onHandleChange}
+                                />
+
+                            </CardContent>
+
+                            <div>
+                                <ButtonGroup className={classes.submit} fullWidth disableRipple variant="contained">
+                                    <Button color="primary" onClick={onSubmit}>Add Category</Button>
+                                    <Button color="secondary"><Link to="/" className={classes.link}>Cancel</Link></Button>
+                                </ButtonGroup>
+                            </div>
+                        </form>
+                    </Card>
                 </CardContent>
                 <CardContent>
                     {/* list all categories */}
-                <Card className={classes.card}>
-                    <Typography variant="h6"> Categories Created </Typography>
-                       {categories && categories.map((category, index)=>(
-                           <Typography variant="body1" color="primary" key={index} value={category._id}>
-                               {category.Name}
-                           </Typography>
-                       ))}       
-                </Card>
+                    <Card className={classes.card}>
+                        <Typography align="center" variant="h5" className={classes.heading} component="p"> Categories Created </Typography>
+                        {categories && categories.map((category, index) => (
+                            <Typography className={classes.cat} variant="h6" align="center" color="primary" key={index} value={category._id}>
+                                {category.Name}
+                            </Typography>
+                        ))}
+                    </Card>
                 </CardContent>
             </Container>
         </div>

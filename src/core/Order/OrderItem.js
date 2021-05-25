@@ -128,18 +128,17 @@ const OrderItem = (props)=> {
             <Card className={classes.row} >
                 
                 <CardContent className={classes.row1}>
-                    <Typography>{"User Name "+props.userName}</Typography>
+                    <Typography variant="h6" component="p">Customer Name</Typography>
+                    <Typography variant="h5" component="p">{props.userName}</Typography>
                 </CardContent>
                 <CardContent className={classes.row2}>
                     <Typography>{`Name: ${props.prodName}`}</Typography>
-                    <Typography>{`Quantity: ${props.qty}`}</Typography>
+                    <Typography>{`Quantity: 1`}</Typography>
                     <Typography>{`Price(LKR): ${props.price}`}</Typography>
-                    <Typography>{`Total Cost(LKR): ${props.price*props.qty}`}</Typography>
+                    <Typography>{`Total Cost(LKR): ${props.price*1}`}</Typography>
                 </CardContent>
                 <CardContent className={classes.row3}>
                     <Typography>{` ${props.date}`}</Typography>
-                    
-                    <Typography>{`State: ${props.status}`}</Typography>
                     {orderType()}
                 </CardContent>
             </Card>

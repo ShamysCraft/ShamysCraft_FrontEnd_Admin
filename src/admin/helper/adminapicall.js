@@ -25,6 +25,18 @@ export const getCategories = () => {
         .catch(err => console.log(err))
 }
 
+// 3. getCategoryCount
+export const getCategoryCount =(userId,token)=>{
+    return fetch(`${API}/getCategoryCount/${userId}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => (response.json()))
+    .catch(err => console.log(err))
+}
+
 
 
 
@@ -95,3 +107,46 @@ export const updateProduct = (productId, userId, token, product) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// 6. getProductCount
+
+export const getTotProdCount =(userId,token)=>{
+    return fetch(`${API}/getProductCount/${userId}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => (response.json()))
+    .catch(err => console.log(err))
+}
+
+
+// 1. getUserCount
+export const getUserCount =(userId,token)=>{
+    return fetch(`${API}/getUserCount/${userId}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => (response.json()))
+    .catch(err => console.log(err))
+}
+
+
+
+// 1. getOrders
+export const getOrders = (userId, token) =>{
+    return fetch(`${API}/order/all/${userId}`,{
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => (response.json()))
+    .catch(err => console.log(err))
+}
+
+
+

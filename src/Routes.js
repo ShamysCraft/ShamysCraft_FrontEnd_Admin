@@ -15,7 +15,7 @@ import UpdateProduct from "./admin/UpdateProducts"
 
 
 import Orders from "./admin/Orders"
-import PendingOrder from "./admin/PendingOrderPage"
+import OrdersReceived from "./admin/OrdersReceived"
 import ConfirmOrder from "./admin/ConfirmedOrderPage"
 import RejectedOrder from "./admin/RejectedOrders"
 
@@ -41,7 +41,7 @@ function Routes() {
         <Route path="/error" component={Error} />
 
         <AdminRoute path="/" exact component={Home}/>
-        <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
+        <AdminRoute path="/adminDashboard" exact component={AdminDashboard}/>
         <AdminRoute path="/profile" component={ProfilePage}/>
         <AdminRoute path='/addItem' component={AddItem} />
         
@@ -58,7 +58,7 @@ function Routes() {
         <AdminRoute path='/product/update/:productId' exact component={UpdateProduct} />
 
 
-        <AdminRoute path='/pendingOrder' component={PendingOrder} />
+        <AdminRoute path='/ordersReceived' component={OrdersReceived} />
 
         <AdminRoute path='/confirmOrder' component={ConfirmOrder} />
 
